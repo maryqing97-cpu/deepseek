@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SOLE SUPPLY · simple sneakers</title>
+    <!-- simple, clean style -->
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #fafafa;
+            color: #111;
+            line-height: 1.5;
+        }
+
+        /* tiny container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1.5rem 2rem;
+        }
+
+        /* header — clean and airy */
+        .site-header {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #eaeaea;
+            padding-bottom: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .logo {
+            font-weight: 600;
+            font-size: 1.8rem;
+            letter-spacing: -0.5px;
+        }
+        .logo span {
+            background: #111;
+            color: white;
+            padding: 0.2rem 0.6rem;
+            border-radius: 30px;
+            font-size: 1.2rem;
+            margin-left: 4px;
+        }
+
+        .cart-badge {
+            background: #fff;
+            border: 1px solid #ddd;
+            padding: 0.5rem 1.2rem;
+            border-radius: 40px;
+            font-size: 0.95rem;
+            font-weight: 500;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+            transition: all 0.1s;
+        }
+        .cart-badge:hover {
+            border-color: #999;
+            background: #f6f6f6;
+        }
+
+        /* simple subheader */
+        .tagline {
+            color: #555;
+            margin-bottom: 2.5rem;
+            font-size: 1.15rem;
+            border-left: 5px solid #111;
+            padding-left: 1rem;
+        }
+
+        /* product grid — simple 3 columns on desktop */
+        .sneaker-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 2.2rem 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        /* card — minimal, almost no cruft */
+        .sneaker-card {
+            background: white;
+            border-radius: 18px;
+            padding: 1.5rem 1.2rem 1.5rem 1.2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.02), 0 2px 5px rgba(0,0,0,0.02);
+            transition: 0.15s ease;
+            border: 1px solid #f0f0f0;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .sneaker-card:hover {
+            box-shadow: 0 12px 24px -8px rgba(0,0,0,0.08);
+            border-color: #dddddd;
+        }
+
+        /* placeholder image — simple block with sneaker vibe */
+        .sneaker-img {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            background: #eaeef2;
+            border-radius: 16px;
+            margin-bottom: 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #3f4a51;
+            font-weight: 400;
+            font-size: 2.5rem;
+            border: 1px solid #dee4e8;
+            transition: background 0.2s;
+        }
+
+        .sneaker-card:hover .sneaker-img {
+            background: #e0e7ec;
+        }
+
+        /* text content */
+        .sneaker-brand {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #6b7280;
+            margin-bottom: 0.2rem;
+        }
+
+        .sneaker-name {
+            font-weight: 600;
+            font-size: 1.3rem;
+            margin-bottom: 0.25rem;
+            line-height: 1.3;
+        }
+
+        .sneaker-price {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin: 0.5rem 0 1rem 0;
+            letter-spacing: -0.5px;
+        }
+
+        /* simple add button */
+        .add-btn {
+            background: none;
+            border: 2px solid #111;
+            color: #111;
+            padding: 0.7rem 0;
+            font-weight: 600;
+            font-size: 1rem;
+            border-radius: 40px;
+            cursor: pointer;
+            transition: 0.1s ease;
+            margin-top: auto;
+            width: 100%;
+            font-family: inherit;
+        }
+
+        .add-btn:hover {
+            background: #111;
+            color: white;
+        }
+
+        /* mini cart summary (static for simplicity) */
+        .cart-summary {
+            background: white;
+            border-radius: 30px;
+            border: 1px solid #e0e0e0;
+            padding: 1.5rem 2rem;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .cart-summary p {
+            font-size: 1.2rem;
+            font-weight: 500;
+        }
+        .cart-summary .item-count {
+            background: #111;
+            color: white;
+            padding: 0.3rem 1rem;
+            border-radius: 40px;
+            font-weight: 500;
+            font-size: 1rem;
+        }
+
+        /* static notice – just to keep it real */
+        .fine-print {
+            border-top: 1px solid #ddd;
+            padding-top: 1.5rem;
+            margin-top: 1rem;
+            color: #777;
+            font-size: 0.9rem;
+            text-align: center;
+        }
+
+        /* responsive small touches */
+        @media (max-width: 600px) {
+            .container {
+                padding: 1rem;
+            }
+            .logo {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- header area with simple cart indicator (static) -->
+        <header class="site-header">
+            <div class="logo">
+                SOLE <span>SUPPLY</span>
+            </div>
+            <div class="cart-badge" aria-label="shopping cart (demo)">
+                🛒 CART (0)
+            </div>
+        </header>
+
+        <!-- friendly description -->
+        <div class="tagline">
+            ⚡ simple kicks · fresh heat · just a static demo
+        </div>
+
+        <!-- SNEAKER GRID – 6 clean products -->
+        <section class="sneaker-grid">
+            <!-- card 1 -->
+            <article class="sneaker-card">
+                <div class="sneaker-img">🥾</div>
+                <div class="sneaker-brand">NIKE</div>
+                <div class="sneaker-name">Air Max Pulse</div>
+                <div class="sneaker-price">$129</div>
+                <button class="add-btn" onclick="alert('demo: added Nike Air Max to cart (static)')">+ add to cart</button>
+            </article>
+
+            <!-- card 2 -->
+            <article class="sneaker-card">
+                <div class="sneaker-img">👟</div>
+                <div class="sneaker-brand">ADIDAS</div>
+                <div class="sneaker-name">UltraBoost 5</div>
+                <div class="sneaker-price">$159</div>
+                <button class="add-btn" onclick="alert('demo: added UltraBoost to cart (static)')">+ add to cart</button>
+            </article>
+
+            <!-- card 3 -->
+            <article class="sneaker-card">
+                <div class="sneaker-img">👞</div>
+                <div class="sneaker-brand">NEW BALANCE</div>
+                <div class="sneaker-name">990v6</div>
+                <div class="sneaker-price">$189</div>
+                <button class="add-btn" onclick="alert('demo: added 990v6 to cart (static)')">+ add to cart</button>
+            </article>
+
+            <!-- card 4 -->
+            <article class="sneaker-card">
+                <div class="sneaker-img">👢</div>
+                <div class="sneaker-brand">PUMA</div>
+                <div class="sneaker-name">Palermo</div>
+                <div class="sneaker-price">$89</div>
+                <button class="add-btn" onclick="alert('demo: added Palermo to cart (static)')">+ add to cart</button>
+            </article>
+
+            <!-- card 5 -->
+            <article class="sneaker-card">
+                <div class="sneaker-img">👠</div>
+                <div class="sneaker-brand">CONVERSE</div>
+                <div class="sneaker-name">Chuck 70</div>
+                <div class="sneaker-price">$75</div>
+                <button class="add-btn" onclick="alert('demo: added Chuck 70 to cart (static)')">+ add to cart</button>
+            </article>
+
+            <!-- card 6 -->
+            <article class="sneaker-card">
+                <div class="sneaker-img">👡</div>
+                <div class="sneaker-brand">VANS</div>
+                <div class="sneaker-name">Old Skool</div>
+                <div class="sneaker-price">$69</div>
+                <button class="add-btn" onclick="alert('demo: added Old Skool to cart (static)')">+ add to cart</button>
+            </article>
+        </section>
+
+        <!-- minimal cart preview (static, just for look & feel) -->
+        <div class="cart-summary">
+            <p>🛍️ your cart · <span class="item-count">0 items</span></p>
+            <span style="color:#555; font-size:0.95rem;">(simple static demo)</span>
+        </div>
+
+        <!-- simple footer / note -->
+        <div class="fine-print">
+            ⚡ SOLE SUPPLY — simple sneakers, zero complexity. <br> 
+            every button triggers a friendly alert – this is a pure static concept.
+        </div>
+    </div>
+
+    <!-- tiny optional script just to show demo interaction -->
+    <script>
+        (function() {
+            // let the cart badge react a bit (purely cosmetic, just for fun)
+            const cartElement = document.querySelector('.cart-badge');
+            const countSpan = document.querySelector('.item-count');
+            const buttons = document.querySelectorAll('.add-btn');
+
+            // small interactive demo: update badge/cart count on click (without real cart)
+            // still keep it simple — it's a static website, but with a tiny playful layer.
+            let clickCount = 0;
+
+            buttons.forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    // prevent any default if needed (already inline alert, but we keep both)
+                    e.preventDefault();
+                    // increment fake counter
+                    clickCount++;
+                    if (cartElement) {
+                        cartElement.innerHTML = `🛒 CART (${clickCount})`;
+                    }
+                    if (countSpan) {
+                        countSpan.innerText = clickCount + (clickCount === 1 ? ' item' : ' items');
+                    }
+                    // optional: also change count in summary? just for demo
+                });
+            });
+
+            // reset? not needed – but keep it friendly
+        })();
+    </script>
+    <!-- no extra libraries, just a clean simple sneaker page -->
+</body>
+</html>
